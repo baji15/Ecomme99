@@ -3,7 +3,7 @@ from otp import genotp
 import os
 from stoken import encode,decode
 from cmail import sendmail
-import razorpay
+#import razorpay
 import re
 import mysql.connector
 #from mysql.connector import (connection) 
@@ -26,7 +26,7 @@ RAZORPAY_KEY_ID='rzp_test_BdYxoi5GaEITjc'
 RAZORPAY_KEY_SECRET="H0FUH2n4747ZSYBRyCn2D6rc"
 app.config['SESSION_TYPE']="filesystem"
 app.secret_key='abdul'
-client=razorpay.Client(auth=(RAZORPAY_KEY_ID,RAZORPAY_KEY_SECRET))
+#client=razorpay.Client(auth=(RAZORPAY_KEY_ID,RAZORPAY_KEY_SECRET))
 mydb=connection.MySQLConnection(user='root',host='localhost',password='Baji@1626',db='ecomme')
 @app.route('/')
 def home():
@@ -525,7 +525,7 @@ def description(itemid):
         flash('could not fetch items')
         return redirect(url_for('index'))
     return render_template('description.html',item_data=item_data)
-@app.route('/pay/<itemid>/<name>/<float:price>',methods=['GET','POST'])
+'''@app.route('/pay/<itemid>/<name>/<float:price>',methods=['GET','POST'])
 def pay(itemid,name,price):
     try:
         qyt=int(request.form['qyt'])
@@ -545,10 +545,10 @@ def pay(itemid,name,price):
         #log the error and return a 400 response
         print(f'Error creating order: {str(e)}')
         flash('Error in Payment')
-        return redirect(url_for('index'))
+        return redirect(url_for('index'))'''
         
         
-@app.route('/success',methods=['POST'])
+'''@app.route('/success',methods=['POST'])
 def success():
     payment_id=request.form.get('razorpay_payment_id')
     order_id=request.form.get('razorpay_order_id')
@@ -571,7 +571,7 @@ def success():
         flash('order placed successfully')
         return redirect(url_for('index'))
     except razorpay.errors.SignatureVerificationError:
-        return 'Payment verification failed',400
+        return 'Payment verification failed',400'''
 @app.route('/orders')
 def orders():
     if session.get('user'):
